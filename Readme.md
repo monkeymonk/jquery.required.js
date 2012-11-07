@@ -23,10 +23,14 @@ $(document).ready(function() {
   
   // Callbacks
   onValidate: function(settings, valid) { // callback each time we validate a field ("this" is the current field)
-    
+    if(valid) {
+      // do something
+    }
   },
   onSubmit: function(settings, valid) {   // callback when we try to submit the form (return "false" to stop submiting, "this" is the current form)
-    
+    if(valid) {
+      // do something
+    }
   }
 }
 ```

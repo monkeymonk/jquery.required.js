@@ -37,6 +37,8 @@ $(document).ready(function() {
 
 ### Methods
 
+/!\ Note to myself: Methods has to be tested separately
+
 ``` javascript
 $('#field').required('validate');
 $('#field').required('destroy');

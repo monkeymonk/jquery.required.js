@@ -40,7 +40,12 @@ $(document).ready(function() {
 /!\ Note to myself: Methods has to be tested separately
 
 ``` javascript
-$('#field').required('validate');
+$('#field').required('validate', function(settings, valid) {
+  if(valid) {
+    // do something
+  }
+});
+
 $('#field').required('destroy');
 ```
 

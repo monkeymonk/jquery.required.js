@@ -54,7 +54,7 @@
 						methods.validate.call(this, settings.onValidate);
 					});
 					
-					return settings.onSubmit.call(this, settings, !fields.is('.required').length);
+					return settings.onSubmit.call(this, settings, !form.find('.required').length);
 				});
 			});
 		}, // init

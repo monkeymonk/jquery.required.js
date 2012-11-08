@@ -30,7 +30,7 @@
 			return this.each(function () {
 				var that = this, $that = $(that), form = $that.closest('form');
 				
-				methods.destroy.call(this);
+				methods.destroy.call($that);
 				
 				settings.message = that.getAttribute('data-required') || settings.message;
 				
@@ -61,33 +61,35 @@
 		
 		// ========================================================================
 		validate: function (callback) {
-			var that = this, value = that.value, label = $(that).add('[for="' + that.id + '"]'), valid = false;
-			
-			callback = callback || settings.onValidate;
-			
-			// if :radio or :checkbox
-			if (this.type.match(/radio|checkbox/i)) {
-				if (that.checked) {
-					valid = true;
+			return $(this).each(function () {
+				var that = this, value = that.value, label = $(that).add('[for="' + that.id + '"]'), valid = false;
+				
+				callback = callback || settings.onValidate;
+				
+				// if :radio or :checkbox
+				if (that.type.match(/radio|checkbox/i)) {
+					if (that.checked) {
+						valid = true;
+					}
+				} else {
+					if (value && value !== that.placeholder) {
+						valid = true;
+					}
 				}
-			} else {
-				if (value && value !== that.placeholder) {
-					valid = true;
+				
+				if (valid) {
+					label.removeClass(settings.className);
+				} else {
+					label.addClass(settings.className);
 				}
-			}
-			
-			if (valid) {
-				label.removeClass(settings.className);
-			} else {
-				label.addClass(settings.className);
-			}
-			
-			callback.call(this, settings, valid);
+				
+				callback.call(this, settings, valid);
+			});
 		}, // validate
 		
 		// ========================================================================
 		destroy: function () {
-			return $(this).each(function () {
+			return this.each(function () {
 				$(this).unbind('.required');
 			});
 		} // destroy

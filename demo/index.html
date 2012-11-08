@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+	<meta charset="UTF-8" />
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" /><![endif]-->
+	
+	<title>Demonstration • jquery.required.js - http://monkeymonk.be</title>
+	
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.min.css" rel="stylesheet" />
+	<style type="text/css">
+	.container{
+		padding: 10px 0;
+	}
+	
+	/* jquery.required.js */
+	.required{
+		border-color: #B94A48 !important;
+		color: #B94A48 !important;
+	}
+	</style>
+	
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+	
+	<div class="container">
+		
+		<div class="hero-unit">
+			<h1>jquery.required.js <small>http://monkeymonk.be</small></h1>
+			<p>
+				HTML5 [required] attribute support for old browsers.
+			</p>
+			<p>
+				<a class="btn btn-primary" href="https://github.com/monkeymonk/jquery.required.js" rel="external"><i class="icon-download-alt icon-white"></i> GitHub project</a>
+			</p>
+		</div>
+		
+		<form class="form" action="#submit" method="post" accept-charset="utf-8">
+			<fieldset>
+				<legend>Legend</legend>
+				
+				<div class="well">
+					<p class="text-error hide">You have to filled all the fields</p>
+					<p class="text-success hide">Thank you!</p>
+				</div>
+				
+				<div class="control-group">
+					<label for="field">Label name</label>
+					<input id="field" type="text" placeholder="Type something…" required="required" />
+				</div>
+				
+				<div class="control-group">
+					<label for="check" class="checkbox"><input id="check" type="checkbox" required="required" /> Check me out</label>
+				</div>
+				
+				<button type="submit" class="btn btn-success">Submit</button> <button class="btn btn-info" id="checkTextField" type="button">Check text field</button> <button class="btn btn-danger" id="disableRequired" type="button">Disable jquery.required.js</button>
+			</fieldset>
+		</form>
+		
+	</div>
+	
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="../jquery.required.js"></script>
+	<script>
+		$(function () { // short document ready
+			
+			$('[required]').required({
+				onValidate: function (settings, valid) {
+					if(valid) {
+						$(this).closest('.control-group').addClass('success');
+					} else {
+						$(this).closest('.control-group').removeClass('success');	
+					}
+				}, // onValid
+				
+				onSubmit: function (settings, valid) {
+					if(valid) {
+						$('.text-success').removeClass('hide');
+						$('.text-error').addClass('hide');
+					} else {
+						$('.text-error').removeClass('hide');
+						$('.text-success').addClass('hide');
+					}
+					
+					return false;
+				} // onSubmit
+			});
+			
+			$('#checkTextField').click(function () {
+				$('#field').required('validate');
+			});
+			
+			$('#disableRequired').click(function () {
+				$('[required]').required('destroy');
+			});
+		});
+	</script>
+</body>
+</html>

@@ -35,7 +35,7 @@
 			</p>
 		</div>
 		
-		<form class="form" action="#submit" method="post" accept-charset="utf-8">
+		<form class="form" action="#submitted" method="post" accept-charset="utf-8">
 			<fieldset>
 				<legend>Legend</legend>
 				
@@ -80,9 +80,9 @@
 					} else {
 						$('.text-error').removeClass('hide');
 						$('.text-success').addClass('hide');
+						
+						return false;
 					}
-					
-					return false;
 				} // onSubmit
 			});
 			

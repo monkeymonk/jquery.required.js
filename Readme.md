@@ -22,12 +22,12 @@ $(document).ready(function() {
   override: true,                         // (default) if "false" we will let the browser manage the [required] attributes
   
   // Callbacks
-  onValidate: function(settings, valid) { // callback each time we validate a field ("this" is the current field)
+  onValidate: function(valid, settings) { // callback each time we validate a field ("this" is the current field)
     if(valid) {
       // do something
     }
   },
-  onSubmit: function(settings, valid) {   // callback when we try to submit the form (return "false" to stop submiting, "this" is the current form)
+  onSubmit: function(valid, settings) {   // callback when we try to submit the form (return "false" to stop submiting, "this" is the current form)
     if(valid) {
       // do something
     }

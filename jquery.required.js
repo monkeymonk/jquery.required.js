@@ -32,10 +32,8 @@
 				
 				methods.destroy.call($that);
 				
-				settings.message = that.getAttribute('data-required') || settings.message;
-				
 				if (settings.override) {
-					$that.on('invalid.required', function (e) {
+					$that.on('invalid', function (e) {
 						e.preventDefault();
 					});
 				}
@@ -54,7 +52,7 @@
 						methods.validate.call(this, settings.onValidate);
 					});
 					
-					return settings.onSubmit.call(this, settings, !form.find('.required').length);
+					return settings.onSubmit.call(this, !form.find('.required').length, settings);
 				});
 			});
 		}, // init
@@ -83,14 +81,15 @@
 					label.addClass(settings.className);
 				}
 				
-				callback.call(this, settings, valid);
+				callback.call(this, valid, settings);
 			});
 		}, // validate
 		
 		// ========================================================================
 		destroy: function () {
 			return this.each(function () {
-				$(this).unbind('.required');
+				$(this).unbind('.required')
+				.closest('form').unbind('.required');
 			});
 		} // destroy
 	};

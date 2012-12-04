@@ -28,27 +28,20 @@
 			}
 			
 			return this.each(function () {
-				var that = this, $that = $(that), form = $that.closest('form');
+				var field = this, $field = $(field), form = $field.closest('form');
 				
-				methods.destroy.call($that);
+				methods.destroy.call($field);
 				
-				if (settings.override) {
-					$that.on('invalid', function (e) {
-						e.preventDefault();
-					});
-				}
-				
-				$that
+				$field
 				.on('keydown.required blur.required', function () {
 					methods.validate.call(this, settings.onValidate);
-				});
-				
-				form.attr('novalidate', 'novalidate')
+				})
+				.closest('form').attr('novalidate', 'novalidate')
 				.unbind('submit.required')
 				.on('submit.required', function () {
-					var fields = $(this).find('[required]');
+					var $fields = $(this).find('[required]');
 					
-					fields.each(function () {
+					$fields.each(function () {
 						methods.validate.call(this, settings.onValidate);
 					});
 					
@@ -60,17 +53,17 @@
 		// ========================================================================
 		validate: function (callback) {
 			return $(this).each(function () {
-				var that = this, value = that.value, label = $(that).add('[for="' + that.id + '"]'), valid = false;
+				var field = this, value = field.value, label = $(field).add('[for="' + field.id + '"]'), valid = false;
 				
 				callback = callback || settings.onValidate;
 				
 				// if :radio or :checkbox
-				if (that.type.match(/radio|checkbox/i)) {
-					if (that.checked) {
+				if (field.type.match(/radio|checkbox/i)) {
+					if (field.checked) {
 						valid = true;
 					}
 				} else {
-					if (value && value !== that.placeholder) {
+					if (value && value !== field.placeholder) {
 						valid = true;
 					}
 				}
@@ -89,7 +82,8 @@
 		destroy: function () {
 			return this.each(function () {
 				$(this).unbind('.required')
-				.closest('form').unbind('.required');
+				.closest('form').removeAttr('novalidate')
+				.unbind('.required');
 			});
 		} // destroy
 	};

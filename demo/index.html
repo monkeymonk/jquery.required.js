@@ -7,93 +7,106 @@
 	<title>Demonstration • jquery.required.js - http://monkeymonk.be</title>
 	
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.min.css" rel="stylesheet" />
-	<style type="text/css">
-	.container{
-		padding: 10px 0;
-	}
-	
-	/* jquery.required.js */
-	.required{
-		border-color: #B94A48 !important;
-		color: #B94A48 !important;
-	}
-	</style>
 	
 	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
 	
 	<div class="container">
-		
-		<div class="hero-unit">
+
+		<div class="page-header">
 			<h1>jquery.required.js <small>http://monkeymonk.be</small></h1>
-			<p>
+
+			<p class="lead">
 				HTML5 [required] attribute support for old browsers.
-			</p>
-			<p>
-				<a class="btn btn-primary" href="https://github.com/monkeymonk/jquery.required.js" rel="external"><i class="icon-download-alt icon-white"></i> GitHub project</a>
+				<br/><br/>
+				<a class="btn btn-primary" href="https://github.com/monkeymonk/jquery.required.js" rel="external">
+					<i class="icon-download-alt icon-white"></i> GitHub project
+				</a>
 			</p>
 		</div>
-		
-		<form class="form" action="#submitted" method="post" accept-charset="utf-8">
-			<fieldset>
-				<legend>Legend</legend>
-				
-				<div class="well">
-					<p class="text-error hide">You have to filled all the fields</p>
-					<p class="text-success hide">Thank you!</p>
+
+		<form class="form form-horizontal" action="#submitted" method="post" accept-charset="utf-8">
+			<legend>Basic exemple</legend>
+			<div class="control-group">
+				<label for="lastname" class="control-label">Lastame*</label>
+				<div class="controls"><input id="lastname" type="text" required="required" /></div>
+			</div>
+			<div class="control-group">
+				<label for="firstname" class="control-label">Firstname*</label>
+				<div class="controls"><input id="firstname" type="text" required="required" /></div>
+			</div>
+			<div class="control-group">
+				<label for="email" class="control-label">E-mail*</label>
+				<div class="controls"><input id="email" type="email" required="required" /></div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<label class="checkbox" for="optin"><input id="optin" type="checkbox" required="required" /> I'm ok with that*</label>
 				</div>
-				
-				<div class="control-group">
-					<label for="field">Label name</label>
-					<input id="field" type="text" placeholder="Type something…" required="required" />
-				</div>
-				
-				<div class="control-group">
-					<label for="check" class="checkbox"><input id="check" type="checkbox" required="required" /> Check me out</label>
-				</div>
-				
-				<button type="submit" class="btn btn-success">Submit</button> <button class="btn btn-info" id="checkTextField" type="button">Check text field</button> <button class="btn btn-danger" id="disableRequired" type="button">Disable jquery.required.js</button>
-			</fieldset>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary" type="submit">Submit</button>
+				<button class="btn btn-info" type="button">Check validity</button>
+				<button class="btn btn-link" type="button">Disable jQuery.required</button>
+			</div>
+
+			<div class="alert alert-info hide">
+				<p class="text-error hide">You have to filled all the fields</p>
+				<p class="text-success hide">Thank you!</p>
+			</div>
 		</form>
 		
 	</div>
 	
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="../jquery.required.js"></script>
-	<script>
-		$(function () { // short document ready
-			
-			$('[required]').required({
-				onValidate: function (settings, valid) {
-					if(valid) {
-						$(this).closest('.control-group').addClass('success');
-					} else {
-						$(this).closest('.control-group').removeClass('success');	
-					}
-				}, // onValid
-				
-				onSubmit: function (settings, valid) {
-					if(valid) {
-						$('.text-success').removeClass('hide');
-						$('.text-error').addClass('hide');
-					} else {
-						$('.text-error').removeClass('hide');
-						$('.text-success').addClass('hide');
-						
-						return false;
-					}
-				} // onSubmit
+	<script src="../jquery.required.min.js"></script>
+	<script type="text/javascript">
+	(function ($) {
+		"use strict";
+
+		function validate(valid) {
+			if (valid) {
+				$(this).closest('.control-group').addClass('success').removeClass('warning');
+			} else {
+				$(this).closest('.control-group').addClass('warning').removeClass('success');
+			}
+		} // validate
+
+		function submit(valid) {
+			valid = valid && (/^[a-z0-9\._-]+@([a-z0-9][a-z0-9-]*[a-z0-9]\.)+([a-z]+\.)?([a-z]+)/).test($('#email').val());
+
+			if (valid) {
+				$('.alert-info').removeClass('hide')
+				.text('Everything is correct!');
+			} else {
+				$('.alert-info').removeClass('hide')
+				.text('Something is wrong!');
+			}
+
+			return false;
+		} // submit
+
+		$(document).ready(function () {
+
+			$('[required]')
+			.required({
+				override: true,
+				onValidate: validate,
+				onSubmit: submit
 			});
-			
-			$('#checkTextField').click(function () {
-				$('#field').required('validate');
+
+			$('.btn-info').click(function () {
+				$('[required]').required('validate');
 			});
-			
-			$('#disableRequired').click(function () {
+
+			$('.btn-link').click(function () {
 				$('[required]').required('destroy');
 			});
-		});
+
+		}); // $.ready
+
+	}(jQuery));
 	</script>
 </body>
 </html>

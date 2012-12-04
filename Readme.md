@@ -1,9 +1,9 @@
-jQuery.required Plugin - Beta
+jQuery.required Plugin - v1.0
 ==================
 
 HTML5 [required] attribute support for old browsers.
 
-http://monkeymonk.github.com/jquery.required.js
+Project site: http://monkeymonk.github.com/jquery.required.js
 
 
 ## Usage
@@ -20,16 +20,21 @@ $(document).ready(function() {
 
 ``` javascript
 {
-  className: 'required',                  // (default) added to each label and field if not filled
-  override: true,                         // (default) if "false" we will let the browser manage the [required] attributes
+  // (default) added to each label and field if not filled
+  className: 'required',
+
+  // (default) if "false" we will let the browser manage the [required] attributes
+  override: true,
   
-  // Callbacks
-  onValidate: function(valid, settings) { // callback each time we validate a field ("this" is the current field)
+  // callback each time we validate a field ("this" is the current field)
+  onValidate: function(valid, settings) {
     if(valid) {
       // do something
     }
   },
-  onSubmit: function(valid, settings) {   // callback when we try to submit the form (return "false" to stop submiting, "this" is the current form)
+  
+  // callback when we try to submit the form (return "false" to stop submiting, "this" is the current form)
+  onSubmit: function(valid, settings) {
     if(valid) {
       // do something
     }

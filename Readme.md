@@ -3,6 +3,8 @@ jQuery.required Plugin - Beta
 
 HTML5 [required] attribute support for old browsers.
 
+http://monkeymonk.github.com/jquery.required.js
+
 
 ## Usage
 

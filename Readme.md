@@ -5,6 +5,8 @@ HTML5 [required] attribute support for old browsers.
 
 Project site: http://monkeymonk.github.com/jquery.required.js
 
+Demo: http://monkeymonk.be/jquery.required.js/demo/
+
 
 ## Usage
 
@@ -45,7 +47,7 @@ $(document).ready(function() {
 ### Methods
 
 ``` javascript
-$('#field').required('validate');
+$('#field').required('validate', onValidate);
 
 $('#field').required('destroy');
 ```

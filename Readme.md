@@ -30,16 +30,12 @@ $(document).ready(function() {
   
   // callback each time we validate a field ("this" is the current field)
   onValidate: function(valid, settings) {
-    if(valid) {
-      // do something
-    }
+    // do something...
   },
   
   // callback when we try to submit the form (return "false" to stop submiting, "this" is the current form)
   onSubmit: function(valid, settings) {
-    if(valid) {
-      // do something
-    }
+    // do something...
   }
 }
 ```
@@ -47,9 +43,11 @@ $(document).ready(function() {
 ### Methods
 
 ``` javascript
-$('#field').required('validate', onValidate);
+$('#field').required(options);                // initialization
 
-$('#field').required('destroy');
+$('#field').required('validate', onValidate); // check a field
+
+$('#field').required('destroy');              // destroy
 ```
 
 

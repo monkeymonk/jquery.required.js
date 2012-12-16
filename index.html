@@ -56,25 +56,23 @@
 
   <span class="c1">// callback each time we validate a field ("this" is the current field)</span>
   <span class="nx">onValidate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">valid</span><span class="p">,</span> <span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="nx">valid</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// do something</span>
-    <span class="p">}</span>
+    <span class="c1">// do something...</span>
   <span class="p">},</span>
 
   <span class="c1">// callback when we try to submit the form (return "false" to stop submiting, "this" is the current form)</span>
   <span class="nx">onSubmit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">valid</span><span class="p">,</span> <span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="nx">valid</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// do something</span>
-    <span class="p">}</span>
+    <span class="c1">// do something...</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 
 <h3>Methods</h3>
 
-<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#field'</span><span class="p">).</span><span class="nx">required</span><span class="p">(</span><span class="s1">'validate'</span><span class="p">,</span> <span class="nx">onValidate</span><span class="p">);</span>
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#field'</span><span class="p">).</span><span class="nx">required</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>                <span class="c1">// initialization</span>
 
-<span class="nx">$</span><span class="p">(</span><span class="s1">'#field'</span><span class="p">).</span><span class="nx">required</span><span class="p">(</span><span class="s1">'destroy'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#field'</span><span class="p">).</span><span class="nx">required</span><span class="p">(</span><span class="s1">'validate'</span><span class="p">,</span> <span class="nx">onValidate</span><span class="p">);</span> <span class="c1">// check a field</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#field'</span><span class="p">).</span><span class="nx">required</span><span class="p">(</span><span class="s1">'destroy'</span><span class="p">);</span>              <span class="c1">// destroy</span>
 </pre></div>
 
 <h2>Browsers: Tested and Working In</h2>

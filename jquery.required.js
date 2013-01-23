@@ -59,20 +59,24 @@
 				
 				// if :radio or :checkbox
 				if (field.type.match(/radio|checkbox/i)) {
-					if ($('[name="' + field.name + '"]:checked').length) {
-						valid = true;
-					}
-				} else {
-					if (value && value !== field.placeholder) {
-						valid = true;
-					}
-				}
-				
-				if (valid) {
-					label.removeClass(settings.className);
-				} else {
-					label.addClass(settings.className);
-				}
+                    if ($('[name="' + field.name + '"]:checked').length) {
+                        $('[name="' + field.name + '"]').each(function () {
+                            $(this).add('[for="' + this.id + '"]').removeClass(settings.className);
+                        });
+
+                        valid = true;
+                    }
+                } else {
+                    if (value && value !== field.placeholder) {
+                        label.removeClass(settings.className);
+
+                        valid = true;
+                    }
+                }
+                
+                if (!valid) {
+                    label.addClass(settings.className);
+                }
 				
 				callback.call(this, valid, settings);
 			});

@@ -59,7 +59,7 @@
 				
 				// if :radio or :checkbox
 				if (field.type.match(/radio|checkbox/i)) {
-					if (field.checked) {
+					if ($('[name="' + field.name + '"]:checked').length) {
 						valid = true;
 					}
 				} else {
